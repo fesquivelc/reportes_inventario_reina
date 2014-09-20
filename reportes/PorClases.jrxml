@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="94f9b88c-ea98-4ce0-b1fd-78e8a4ac3df1">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="92"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="d48fe1e3-f687-4040-9c4d-37ed170d12c0"/>
+	<parameter name="insignia" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\SOPORTE\\Downloads\\appInventarioReina1\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ruta" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Users\\SOPORTE\\Downloads\\appInventarioReina1\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT cl.id as codigoClase, cl.clase
+FROM clase cl
+WHERE (SELECT count(bien.id) FROM bien INNER JOIN clase on bien.clase_id = clase.id INNER JOIN codigo c on c.bien_id = bien.id WHERE clase.id = cl.id AND c.codigo NOT LIKE '-%') > 0]]>
+	</queryString>
+	<field name="codigoClase" class="java.lang.Long"/>
+	<field name="clase" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="3" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="119" y="0" width="162" height="32" uuid="30614d7d-c57c-4993-8895-767035e76e48"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[I.E. "SANTA MARIA REINA" RUC: 20105864702]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="56" width="285" height="22" uuid="2f5654bc-c957-461c-93ce-422c2f3a9e01"/>
+				<textElement>
+					<font fontName="SansSerif" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO DE BIENES POR CLASE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="104" height="56" uuid="7d4c2548-b4d1-4b32-9f95-23d698a5ec6d"/>
+				<imageExpression><![CDATA[$P{insignia}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="414" y="4" width="40" height="9" uuid="b6e83c94-c62f-4310-ac1d-a80c65b5c398"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Impreso el :]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="4" width="99" height="9" uuid="fd09b352-f033-4570-a037-a563710d0b22"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="415" y="13" width="40" height="9" uuid="d8321fd0-d7d2-44db-92c5-1a1423f97b78"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[A horas :]]></text>
+			</staticText>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="455" y="13" width="33" height="9" uuid="357e5b6b-b960-408e-ba52-cad00c0fb007"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="488" y="13" width="32" height="9" uuid="9b360492-7eac-49eb-9634-2e5da21d2130"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Página N°]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="520" y="13" width="19" height="9" uuid="ce8505af-ff6c-43f1-bddc-2edd8e7bd81a"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="539" y="13" width="15" height="9" uuid="9ddfc331-d83b-4a04-8d18-44871446c4b0"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="100" width="176" height="20" uuid="2a6f0202-e1bd-43c8-8f6b-2628a04641c8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="20" uuid="381ae456-d844-48a5-bb04-ddb4b7fe7cbc"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLASE:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="642" splitType="Stretch">
+			<subreport>
+				<reportElement x="-15" y="0" width="554" height="642" uuid="a0893077-b02f-4f89-9b1b-139b52422011"/>
+				<subreportParameter name="insignia"/>
+				<subreportParameter name="idClase">
+					<subreportParameterExpression><![CDATA[$F{codigoClase}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{ruta} + "PorClasesSubreporte.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

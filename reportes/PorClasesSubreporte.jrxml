@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="94f9b88c-ea98-4ce0-b1fd-78e8a4ac3df1">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="d48fe1e3-f687-4040-9c4d-37ed170d12c0"/>
+	<parameter name="insignia" class="java.lang.String"/>
+	<parameter name="idClase" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT c.codigo,c.estado,b.detalle, a.codigo AS codAmbiente, a.ambiente, a.responsable,cl.clase
+FROM ambiente a
+INNER JOIN codigo c ON a.id = c.ambiente_id
+INNER JOIN bien b ON c.bien_id = b.id
+INNER JOIN clase cl ON b.clase_id = cl.id
+WHERE
+c.codigo NOT LIKE '-%' and cl.id = $P{idClase}]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="detalle" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codAmbiente" class="java.lang.String"/>
+	<field name="ambiente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="responsable" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clase" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="1" width="54" height="14" uuid="4055060b-311e-49d5-99b2-9edbff63d866"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="1" width="128" height="14" uuid="4055060b-311e-49d5-99b2-9edbff63d866"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="1" width="116" height="14" uuid="4055060b-311e-49d5-99b2-9edbff63d866"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AMBIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="1" width="100" height="14" uuid="4055060b-311e-49d5-99b2-9edbff63d866"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="554" height="1" uuid="8f181aa4-814e-4590-8285-598cb90da017"/>
+			</line>
+			<line>
+				<reportElement x="1" y="14" width="554" height="1" uuid="8f181aa4-814e-4590-8285-598cb90da017"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="15" uuid="1adb129c-2825-4641-aa54-dad93ff2e801"/>
+			</line>
+			<staticText>
+				<reportElement x="219" y="1" width="116" height="14" uuid="aee22c2e-70ba-47d3-9957-797620fd42f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD-AMBIENTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="11" width="554" height="1" uuid="8f181aa4-814e-4590-8285-598cb90da017"/>
+			</line>
+			<textField>
+				<reportElement x="454" y="0" width="100" height="11" uuid="9ae4582f-5e9c-440f-a75a-b7a28aa78ec8"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="-15" width="1" height="27" uuid="c659396b-cd2b-4688-a9b0-9c17c56d70bb"/>
+			</line>
+			<textField>
+				<reportElement x="335" y="0" width="116" height="12" uuid="66166179-2de1-4ef9-b680-2c02e7051bf1"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ambiente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="88" height="11" uuid="68fd554f-01a4-4baf-8bef-848dcd7f1e6c"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="128" height="11" uuid="ac6033b9-7368-44b1-a8a8-ace5d7ea45aa"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detalle}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="554" y="0" width="1" height="12" uuid="a7284bd4-1461-459a-bd2e-464384333250"/>
+			</line>
+			<textField>
+				<reportElement x="236" y="0" width="99" height="12" uuid="6060a435-5941-4307-b42d-51718241b97b"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codAmbiente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="15" width="554" height="1" uuid="81b62e40-78a9-4f9c-846e-a6b83bc077df"/>
+			</line>
+			<staticText>
+				<reportElement x="58" y="0" width="215" height="15" uuid="41df5eaf-5243-480e-9764-3415df80c367"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE BIENES:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="451" y="0" width="104" height="15" uuid="004dcad2-fb49-4ad5-92c9-dcacd3ec5774"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

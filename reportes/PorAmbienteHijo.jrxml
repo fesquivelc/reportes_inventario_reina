@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PorAmbienteHijo" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="656415bb-eb99-4297-99d1-a341cad4346b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idAmbiente" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     codigo.codigo AS codigo_codigo,
+     codigo.serie AS codigo_serie,
+     codigo.estado AS codigo_estado,
+     codigo.precio AS codigo_precio,
+     codigo.caracteristicas AS codigo_caracteristicas,
+     clase.clase AS clase_clase,
+     bien.detalle AS bien_detalle,
+     ambiente.responsable AS ambiente_responsable
+FROM
+     clase INNER JOIN bien  ON clase.id = bien.clase_id
+     INNER JOIN codigo ON bien.id = codigo.bien_id
+     INNER JOIN ambiente ON codigo.ambiente_id = ambiente.id
+WHERE
+     ambiente.id = $P{idAmbiente} AND NOT (codigo.codigo LIKE '-%' OR codigo.codigo LIKE '%-')]]>
+	</queryString>
+	<field name="codigo_codigo" class="java.lang.String"/>
+	<field name="codigo_serie" class="java.lang.String"/>
+	<field name="codigo_estado" class="java.lang.String"/>
+	<field name="codigo_precio" class="java.lang.Double"/>
+	<field name="codigo_caracteristicas" class="java.lang.String"/>
+	<field name="clase_clase" class="java.lang.String"/>
+	<field name="bien_detalle" class="java.lang.String"/>
+	<field name="ambiente_responsable" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="1" width="114" height="15" uuid="3f91602a-55a0-41d2-a8fa-0a03212bd7ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="0" width="132" height="15" uuid="8db9a1bd-1d13-4ef2-9aff-d34e18f40ced"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<line>
+				<reportElement x="18" y="0" width="517" height="1" uuid="947cf919-c6d2-4d9d-86ad-804905dca29f"/>
+			</line>
+			<staticText>
+				<reportElement x="470" y="0" width="65" height="15" uuid="eef1db8c-dccb-4aaa-91a5-b0b81ff0a567"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="17" y="0" width="1" height="16" uuid="adf3cd4b-4772-40d7-9d26-1a115eeb0ec1"/>
+			</line>
+			<line>
+				<reportElement x="535" y="0" width="1" height="16" uuid="ec7c1784-6095-42ed-a2ea-6d14153f785a"/>
+			</line>
+			<line>
+				<reportElement x="17" y="15" width="518" height="1" uuid="84203ab4-0488-4bde-b07f-12026fee360a"/>
+			</line>
+			<staticText>
+				<reportElement x="264" y="1" width="110" height="14" uuid="bcccae06-f2d8-42ac-927b-d3feae8cbff3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLASE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement x="17" y="0" width="1" height="16" uuid="f1e1879a-ce43-4878-89c4-fcae1de8f294"/>
+			</line>
+			<line>
+				<reportElement x="535" y="0" width="1" height="16" uuid="3cc11678-8e5b-4a04-a67d-ed7e20480e32"/>
+			</line>
+			<line>
+				<reportElement x="17" y="15" width="519" height="1" uuid="ec5ef62f-8c19-421c-9a90-0015376939ad"/>
+			</line>
+			<textField>
+				<reportElement x="18" y="1" width="114" height="15" uuid="5bdc7b0a-9fe9-451d-8e1c-6fa9129048a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="2" width="132" height="14" uuid="5accdb59-839a-45fd-bbff-b08565ca5fba"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bien_detalle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="1" width="65" height="14" uuid="2ef9aa8d-50ba-432f-ab7e-b6b2578ba25b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="1" width="110" height="14" uuid="80e8c965-4db0-40c0-8db0-b3c762eec1eb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clase_clase}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="1" width="215" height="15" uuid="ce05be63-1ed7-4570-bf39-d0c20794af11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE REGISTROS POR AMBIENTE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="18" y="15" width="517" height="1" uuid="294ad3cc-9b69-49ac-897e-328002cac6dc"/>
+			</line>
+			<textField>
+				<reportElement x="435" y="1" width="100" height="15" uuid="607a8362-978b-45af-9c8e-644e6067ee0d"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
